@@ -1,0 +1,42 @@
+---
+title: "eds221_day7_interactive"
+format: html
+---
+
+# Refresher 1
+```{r}
+
+
+library(tidyverse)
+library(lubridate)
+library(palmerpenguins)
+view(penguins)
+
+
+penguins_clean <- penguins %>%
+  filter(island == c("Biscoe","Dream")) %>%
+  select(-"sex", -"year") %>% 
+  mutate( body_mass_kg = body_mass_g / 1000) %>%
+  rename( location = island)
+
+                                    
+```
+
+
+# Refresher 2
+```{r}
+
+library(tidyverse)
+library(lubridate)
+library(palmerpenguins)
+
+mean_sd_penguin <- penguins %>%
+  filter( species == "Adelie" & !is.na(flipper_length_mm)) %>%
+  group_by(sex) %>%
+  summarize ( mean_flipper_length = mean(flipper_length_mm), sd_flipper_length = sd(flipper_length_mm))
+
+
+```
+
+ 
+ 
