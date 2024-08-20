@@ -1,0 +1,79 @@
+---
+title: "eds221_m2021_day7_interactive"
+format: html
+---
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(lubridate)
+
+
+view(penguins)
+
+adelie_penguins <- penguins %>% filter(species == "Adelie") %>% filter(!(is.na ("flipper_length_mm")))
+
+
+```
+
+```{r}
+animals <- tibble::tribble(
+  ~location,   ~species,  ~maturity,
+   "lagoon",   "bobcat",    "adult",
+    "bluff",   "coyote", "juvenile",
+    "creek",      "fox",    "adult",
+     "oaks", "squirrel", "juvenile",
+    "bluff",   "bobcat",    "adult"
+  )
+
+
+sites <- tibble::tribble(
+  ~location,      ~full_site_name, ~jurisdiction,
+    "beach",       "Goleta Beach",     "SB City",
+   "lagoon",        "UCSB Lagoon",        "UCSB",
+    "bluff",       "Ellwood Mesa",     "SB City",
+     "oaks", "Fremont Campground",        "USFS"
+  )
+
+```
+
+# Mutating joins
+
+
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+library(lubridate)
+
+full_join_example <- full_join(animals, sites)
+
+left_join_example <- left_join(animals, sites)
+
+right_join_example <- right_join(animals, sites)
+
+inner_join_example <- inner_join(animals, sites)
+
+```
+
+# Anti-joins
+
+```{r}
+semi_join_example <- semi_join(animals, sites)
+
+semi_join_test <- animals %>% filter(location %in% sites$location)
+
+anti_join_example <- anti_join(animals, sites)
+
+anti_join_test <- animals %>% filter(!location %in% sites$location)
+
+```
+
+```{r}
+sites <- sites %>%
+  rename(place = location)
+
+test_join <- full_join(animals, sites, by = c("location" = "place"))
+
+```
+
+
